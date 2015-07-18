@@ -20,11 +20,22 @@ public class GroupHelper extends HelperBase {
 	    fillGroupForm(group);
 	    submitGroupCreation();
 	    returnToGroupPage();
+	    rebuildCache();
 		
 	}
 	
+	private List<GroupData> cachedGroups;
+	
 	public List<GroupData> getGroups() {
-		List<GroupData> groups = new ArrayList<GroupData>(); 
+		if (cachedGroups == null) {
+			rebuildCache();
+		}
+		return cachedGroups;
+	}
+	
+	private void rebuildCache() {
+
+		List<GroupData> cachedGroups = new ArrayList<GroupData>(); 
 		
 		manager.navigateTo().groupsPage();
 		List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
@@ -32,16 +43,16 @@ public class GroupHelper extends HelperBase {
 			String title = checkbox.getAttribute("title");
 			title.substring("Select (".length(), title.length() - ")".length());
 			String name = title.substring("Select (".length(), title.length() - ")".length());
-			groups.add(new GroupData().withName(name));
+			cachedGroups.add(new GroupData().withName(name));
 		}
-		return groups;
 	}
-	
+
 	public GroupHelper modifyGroup(int index, GroupData group) {
 		initGroupModification(index);
 		fillGroupForm(group);
 		submitGroupModification();
-		returnToGroupPage();	
+		returnToGroupPage();
+		rebuildCache();
 		return this;
 	}
 	
@@ -49,6 +60,7 @@ public class GroupHelper extends HelperBase {
 		selectGroupByIndex(index);
 		submitGroupDeletion();
 		returnToGroupPage();
+		rebuildCache();
 		return this;
 	}
 	
@@ -72,6 +84,7 @@ public class GroupHelper extends HelperBase {
 
 	public GroupHelper submitGroupCreation() {
 		click(By.name("submit"));
+		cachedGroups = null;
 		return this;
 	}
 
@@ -82,12 +95,14 @@ public class GroupHelper extends HelperBase {
 	}
 
 	public GroupHelper submitGroupModification() {
-		click(By.name("update"));		
+		click(By.name("update"));
+		cachedGroups = null;
 		return this;
 	}
 	
 	private void submitGroupDeletion() {
 		click(By.name("delete"));
+		cachedGroups = null;
 	}
 
 }
