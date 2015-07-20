@@ -1,19 +1,19 @@
 package com.example.tests;
 
 public class ContactData  implements Comparable<ContactData>{
-	public String firstname;
-	public String lastname;
-	public String address;
-	public String homenumb;
-	public String mobilenumb;
-	public String worknumb;
-	public String email;
-	public String email2;
-	public String bday;
-	public String bmonth;
-	public String byear;
-	public String address2;
-	public String secondpfone;
+	private String firstname;
+	private String lastname;
+	private String address;
+	private String homenumb;
+	private String mobilenumb;
+	private String worknumb;
+	private String email;
+	private String email2;
+	private String bday;
+	private String bmonth;
+	private String byear;
+	private String address2;
+	private String secondpfone;
 	
 	public ContactData() {}
 	
@@ -34,9 +34,59 @@ public class ContactData  implements Comparable<ContactData>{
 		this.byear = byear;
 		this.address2 = address2;
 		this.secondpfone = secondpfone;
+	}	
+
+	public String getFirstname() {
+		return firstname;
 	}
 
-	
+	public String getLastname() {
+		return lastname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getHomenumb() {
+		return homenumb;
+	}
+
+	public String getMobilenumb() {
+		return mobilenumb;
+	}
+
+	public String getWorknumb() {
+		return worknumb;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getEmail2() {
+		return email2;
+	}
+
+	public String getBday() {
+		return bday;
+	}
+
+	public String getBmonth() {
+		return bmonth;
+	}
+
+	public String getByear() {
+		return byear;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public String getSecondpfone() {
+		return secondpfone;
+	}
 
 	@Override
 	public String toString() {
@@ -97,6 +147,71 @@ public class ContactData  implements Comparable<ContactData>{
 		} else {
 			return this.firstname.toLowerCase().compareTo(other.firstname.toLowerCase());
 		} 
+	}
+
+	public ContactData withFirstName(String firstname) {
+		this.firstname = firstname;
+		return this;
+	}
+
+	public ContactData withLastName(String lastname) {
+		this.lastname = lastname;
+		return this;
+	}
+	
+	public ContactData withEmail(String email){
+		this.email = email;
+		return this;
+	}
+
+	public ContactData withMobileNumber(String mobilenumb) {
+		this.mobilenumb = mobilenumb;
+		return this;
+	}
+
+	public ContactData withHomeNumber(String homenumb) {
+		this.homenumb = homenumb;
+		return this;
+	}
+
+	public ContactData withSecondPfone(String secondpfone) {
+		this.secondpfone = secondpfone;
+		return this;
+	}
+
+	public ContactData withWorkNumber(String worknumb) {
+		this.worknumb = worknumb;
+		return this;
+	}
+
+	public ContactData withAddress(String address) {
+		this.address = address;
+		return this;
+	}
+
+	public ContactData withaddress2(String address2) {
+		this.address2 = address2;
+		return this;
+	}
+
+	public ContactData withEmail2(String email2) {
+		this.email2 = email2;
+		return this;
+	}
+
+	public ContactData withBMonth(String bmonth) {
+		this.bmonth = bmonth;
+		return this;
+	}
+
+	public ContactData withBDay(String bday) {
+		this.bday = bday;
+		return this;
+	}
+
+	public ContactData withBYear(String byear) {
+		this.byear = byear;
+		return this;
 	}
 
 }

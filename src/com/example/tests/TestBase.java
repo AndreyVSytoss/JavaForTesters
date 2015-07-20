@@ -44,33 +44,32 @@ public class TestBase {
 	public Iterator<Object[]> randomValidContactGenerator(){
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (int i = 0; i < 5; i++){
-			ContactData contact = new ContactData();
-			contact.firstname = generateRandomString();
-			contact.lastname = generateRandomString();
-			contact.email = generateRandomString();
-			contact.mobilenumb = generateRandomString();
-			contact.homenumb = generateRandomString();
-			contact.secondpfone = generateRandomString();
-			contact.worknumb = generateRandomString();
-			contact.address = generateRandomString();
-			contact.address2 = generateRandomString();
-			contact.email2 = generateRandomString();
-			contact.bmonth = generateRandomMonth();
-			contact.bday = generateRandomDay();
-			contact.byear = generateRandomYear();
+			ContactData contact = new ContactData()
+			.withFirstName(generateRandomString())
+			.withLastName(generateRandomString())
+			.withEmail(generateRandomString())
+			.withMobileNumber(generateRandomString())
+			.withHomeNumber(generateRandomString())
+			.withSecondPfone(generateRandomString())
+			.withWorkNumber(generateRandomString())
+			.withAddress(generateRandomString())
+			.withaddress2(generateRandomString())
+			.withEmail2(generateRandomString())
+			.withBMonth(generateRandomMonth())
+			.withBDay(generateRandomDay())
+			.withBYear(generateRandomYear());
 			
-			if (contact.email.equals("")) {
-				contact.email = contact.email2;
-				contact.email2 = "";
+			if (contact.getEmail().equals("")) {
+				contact.withEmail(contact.getEmail2());
+				contact.withEmail2("");
 			}
 			
-			if (contact.homenumb.equals("")){
-				contact.homenumb = contact.mobilenumb;
-				if(contact.mobilenumb.equals("")){
-					contact.homenumb = contact.worknumb;
+			if (contact.getHomenumb().equals("")){
+				contact.withHomeNumber(contact.getMobilenumb());
+				if(contact.getMobilenumb().equals("")){
+					contact.withHomeNumber(contact.getWorknumb());
 				}
 			}
-			
 			list.add(new Object[]{contact});
 		}
 		return list.iterator();

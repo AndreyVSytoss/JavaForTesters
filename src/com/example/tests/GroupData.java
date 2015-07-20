@@ -61,7 +61,6 @@ public class GroupData implements Comparable<GroupData>{
 
 	public GroupData withName(String name) {
 		this.name = name;
-		// TODO Auto-generated method stub
 		return this;
 	}
 
