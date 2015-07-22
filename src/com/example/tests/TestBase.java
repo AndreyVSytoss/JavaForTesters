@@ -9,6 +9,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
+import static com.example.tests.GroupDataGenerator.generateRandomGroups;
+
 import com.example.fw.ApplicationManager;
 
 
@@ -28,18 +30,19 @@ public class TestBase {
 
 	@DataProvider
 	public Iterator<Object[]> randomValidGroupGenerator(){
-		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i = 0; i < 5; i++){
-			GroupData group = new GroupData()
-			.withName(generateRandomString())
-			.withHeader(generateRandomString())
-			.withFooter(generateRandomString());
-			list.add(new Object[]{group});
-		}
-		// ...
+		List<GroupData> groups = generateRandomGroups(5);
+		List<Object[]> list = wrapGroupsForDataProvider(groups);
 		return list.iterator();
 	}
 	
+	private List<Object[]> wrapGroupsForDataProvider(List<GroupData> groups) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for (GroupData group: groups) {
+			list.add(new Object[]{group});
+		}
+		return list;
+	}
+
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator(){
 		List<Object[]> list = new ArrayList<Object[]>();
