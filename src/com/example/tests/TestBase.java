@@ -27,15 +27,8 @@ public class TestBase {
 	public void tearDown() throws Exception {
 		app.stop();
 		}
-
-	@DataProvider
-	public Iterator<Object[]> randomValidGroupGenerator(){
-		List<GroupData> groups = generateRandomGroups(5);
-		List<Object[]> list = wrapGroupsForDataProvider(groups);
-		return list.iterator();
-	}
 	
-	private List<Object[]> wrapGroupsForDataProvider(List<GroupData> groups) {
+	protected List<Object[]> wrapGroupsForDataProvider(List<GroupData> groups) {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (GroupData group: groups) {
 			list.add(new Object[]{group});
