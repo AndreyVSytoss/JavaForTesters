@@ -1,9 +1,11 @@
 package com.example.fw;
 
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class ApplicationManager {
 	private NavigationHelper navigationHelper;
@@ -12,12 +14,22 @@ public class ApplicationManager {
 	
     public WebDriver driver;
 	public String baseUrl;
+	private Properties properties;
 	
-	public ApplicationManager() {
-	    driver = new FirefoxDriver();
-	    baseUrl = "http://localhost/";
+	public ApplicationManager(Properties properties) {
+	    this.properties = properties;
+	    String browser = properties.getProperty("browser");
+	    if ("firefox".equals(browser)){
+	    	driver = new FirefoxDriver();
+	    } else if ("ie".equals(browser)){
+	    	System.setProperty("webdriver.ie.driver", "E:/IEDriverServer.exe");
+			driver = new InternetExplorerDriver();
+	    } else {
+	    	throw new Error("Unsupported browser " + browser);
+	    }
+	    baseUrl = properties.getProperty("baseUrl");
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	    driver.get(baseUrl + "/addressbookv4.1.4/addressbookv4.1.4/");
+	    driver.get(baseUrl);
 	}
 
 	public void stop() {
