@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.testng.annotations.DataProvider;
+
 import com.thoughtworks.xstream.XStream;
 
 public class GroupDataGenerator {

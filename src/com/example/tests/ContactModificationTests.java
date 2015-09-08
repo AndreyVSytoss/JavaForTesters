@@ -2,7 +2,6 @@ package com.example.tests;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
-import java.util.Collections;
 import java.util.Random;
 
 import org.testng.annotations.Test;
