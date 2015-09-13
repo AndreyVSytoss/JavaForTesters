@@ -14,7 +14,7 @@ public class Sample {
 		Properties properties = new Properties();
 		properties.load(new java.io.FileReader(new File("application.properties")));
 		ApplicationManager app = new ApplicationManager(properties);
-		System.out.println(app.getHibernateHelper().listGroups());
+		System.out.println(app.getHibernateHelper().listContacts());
 	}
 
 }

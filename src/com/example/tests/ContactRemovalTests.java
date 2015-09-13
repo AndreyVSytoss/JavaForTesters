@@ -14,7 +14,7 @@ public class ContactRemovalTests extends TestBase{
 	public void deleteSomeContact(){
     
     //save old state
-	SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
+	SortedListOf<ContactData> oldList = app.getContactHelper().getUiContacts();
 
     Random rnd = new Random();
     int index = rnd.nextInt(oldList.size()-1);
@@ -23,7 +23,7 @@ public class ContactRemovalTests extends TestBase{
     app.getContactHelper().deleteContact(index);
     
     //save new state
-    SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
+    SortedListOf<ContactData> newList = app.getContactHelper().getUiContacts();
     
     //compare states
     assertThat(newList, equalTo(oldList.without(index)));

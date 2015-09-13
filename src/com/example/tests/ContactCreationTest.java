@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -26,15 +27,25 @@ public class ContactCreationTest extends TestBase {
 	public void createSomeContactTests(ContactData contact) throws Exception {
 		
     //save old state
-	SortedListOf<ContactData> oldcList = app.getContactHelper().getContacts();
+	SortedListOf<ContactData> oldcList = app.getModel().getContacts();
     
     //actions
     app.getContactHelper().createContact(contact);
     
     //save new state
-    SortedListOf<ContactData> newcList = app.getContactHelper().getContacts();
-    
+    SortedListOf<ContactData> newcList = app.getModel().getContacts();
+    List<ContactData> dblist =  app.getHibernateHelper().listContacts();
+   
     //compare states
-    assertThat(newcList, equalTo(oldcList.withAdded(contact)));
+    assertThat(newcList, equalTo(oldcList));
+	if (wantToCheck()){
+    if ("yes".equals(app.getProperty("check.db"))) {
+    	assertThat(app.getModel().getContacts(), equalTo(app.getHibernateHelper().listContacts()));	
+    }
+
+    if ("yes".equals(app.getProperty("check.ui"))) {
+        assertThat(app.getModel().getContacts(), equalTo(app.getContactHelper().getUiContacts()));
+    }
+	}
   }
 }
